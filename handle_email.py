@@ -22,7 +22,8 @@ class LogSenderHandler(InboundMailHandler):
                       sender=message.sender,
                       subject=message.subject,
                       content=content,
-                      date=datetime.strptime(message.date, "%a, %d %b %Y %H:%M:%S -0000"))
+        # Correct format would be "%a, %d %b %Y %H:%M:%S %z", but "%z" has issues...
+                      date=datetime.strptime(message.date[:-6], "%a, %d %b %Y %H:%M:%S"))
         email.put()
 
         # See if any subscriber wants this email

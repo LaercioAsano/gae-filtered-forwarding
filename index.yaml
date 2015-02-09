@@ -1,6 +1,10 @@
 indexes:
-- kind: Greeting
+- kind: Email
   ancestor: yes
   properties:
   - name: date
     direction: desc
+- kind: Subscriber
+  ancestor: yes
+  properties:
+  - name: uid

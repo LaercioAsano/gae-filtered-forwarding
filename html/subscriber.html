@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+    <link rel="stylesheet" href="/css/main.css">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <title>Filtered email Forwarding</title>
+  </head>
+  <body role='document'>
+    <div class="container">
+
+      <!-- Navigation -->
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation"><a href="/">Main</a></li>
+            <li role="presentation" class="active"><a href="#">Subscriber Area</a></li>
+            <li role="presentation"><a href="{{logout}}">Logout</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Filtered Forwarding</h3>
+      </div>
+
+      <!-- Info -->
+      <div class="panel panel-default">
+        <div class="panel-heading">User: {{name}}</div>
+        <div class="panel-body">
+          <div class="alert alert-{{status}}" role="alert">{{message}}</div>
+        </div>
+      </div>
+
+      <!-- Watched words -->
+      <div class="panel panel-default">
+        <div class="panel-heading"><h3 class="panel-title">Watched words</h3></div>
+        <div class="panel-body">
+          <ul>
+            {% for word in words %}
+              <li>{{word}}</li>
+            {% endfor %}
+          </ul>
+
+          <form class="form-inline" method="post">
+            <div class="form-group">
+              <label for="word">Word</label>
+              <input type="text" class="form-control" name="word" id="word" placeholder="Write word">
+            </div>
+            <button type="submit" name="bt" value="add" class="btn btn-default">Add word</button>
+            <button type="submit" name="bt" value="remove" class="btn btn-default">Remove word</button>
+          </form>
+        </div>
+      </div>
+
+
+      <!-- Forwarded email -->
+      <div class="panel panel-default">
+        <div class="panel-heading"><h3 class="panel-title">Recently forwarded emails</h3></div>
+        <div class="panel-body">
+          {% for email in forwarded %}
+            <hr>
+            <div>
+              <p><b>From:</b> {{email.sender}}</p>
+              <p><b>Subject:</b> {{email.subject}}</p>
+              <p><b>Content:</b> {{email.content}}</p>
+            </div>
+          {% endfor %}
+          <hr>
+        </div>
+      </div>
+
+    </div>
+    <!-- Bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
+{% endautoescape %}
